@@ -1,8 +1,4 @@
 var SpriteBatch = function() {
-
-
-	this.draw = draw;
-
 	var t = setInterval(function(){
 		if(document.getElementsByTagName('canvas').length>0) {
 
@@ -18,10 +14,11 @@ var SpriteBatch = function() {
 	
 
 
-	function draw(resource,x,y) {
-
-			
-		ctx.drawImage(resource.settings['img'],x,y);
+	this.draw = function(resource,x,y) {
+		if(x && y) {
+			ctx.drawImage(resource.settings['img'],x,y);
+		}
+		
 
 
 

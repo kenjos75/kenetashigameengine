@@ -14,6 +14,14 @@
 		<!-- responsible for textures -->
 		<script src="js/texture.js"></script>
 
+
+		<!-- responsible for actors -->
+		<script src="js/stage.js"></script>
+
+
+		<!-- responsible for stage -->
+		<script src="js/stage.js"></script>
+
 		<!-- main class -->
 		<script src="js/game.js"></script>
 
@@ -26,8 +34,13 @@
 					init: function() {
 
 						var txt = new Texture('smile.png');
-						var sad = new Texture('sad.png');
+						var sad = new Texture('sad.png'); 
+
+
+
 						var spr = new SpriteBatch();
+
+
 						//initialize all variables here
 						var settings =  {
 							width: 500,
@@ -42,14 +55,7 @@
 					//overrides
 					//do all the drawings here
 					render: function(settings) {
-						var txt = settings['texture'];
-						var spr = settings['spritebatch'];
-						var sad = settings['sad'];
-
-						//Game.clearRect(0, 0,Game.canvas.width,Game.canvas.height);
-						spr.draw(txt,0,0);
-						spr.draw(sad,100,0);
-
+						
 
 					}
 				});
