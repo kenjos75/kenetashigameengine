@@ -7,11 +7,8 @@ var GameScreen = function() {
 			width: 100,
 			height: 100
 		};
-
-
 	}
-	this.render = function() {
-
+	this.render = function(variables) {
 		console.log('render');
 	}
 

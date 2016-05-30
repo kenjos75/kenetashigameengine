@@ -2,110 +2,62 @@
 <html>
 	<head>
 		<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+
+
+		<!-- responsible for setting/changing screen -->
 		<script src="js/screen.js"></script>
+
+
+		<!-- responsible for textures -->
+		<script src="js/spritebatch.js"></script>
+
+		<!-- responsible for textures -->
+		<script src="js/texture.js"></script>
+
+		<!-- main class -->
+		<script src="js/game.js"></script>
+
 		<script type="text/javascript">
 
-			var Kenetashi ={
+			jQuery(document).ready(function(){
+				var gs = Kenetashi.extends('GameScreen',{
+					//overrides
+					//this is the constructor
+					init: function() {
 
-				extends: function(className,args) {
-					if(window[className]) {
-						var c = new window[className];
-						jQuery.each(args,function(key,value){
-							c[key] = value;
-						});
-						return c;
-					}else{
-						console.log('Classname does not exists.');
-						return false;
+						var txt = new Texture('smile.png');
+						var sad = new Texture('sad.png');
+						var spr = new SpriteBatch();
+						//initialize all variables here
+						var settings =  {
+							width: 500,
+							height: 500,
+							texture: txt,
+							sad: sad,
+							spritebatch: spr
+						};
+						return settings;
+					},
+
+					//overrides
+					//do all the drawings here
+					render: function(settings) {
+						var txt = settings['texture'];
+						var spr = settings['spritebatch'];
+						var sad = settings['sad'];
+
+						//Game.clearRect(0, 0,Game.canvas.width,Game.canvas.height);
+						spr.draw(txt,0,0);
+						spr.draw(sad,100,0);
+
+
 					}
-					
-				}
+				});
 
-			}
+				//set default screen
+				Game.setScreen(gs);
 
-			var gOriginal = function(){
-
-
-				this.setScreen = setScreen;
-				this.loadCanvas = loadCanvas;
-
-				var t = setInterval(function(){
-					if(document.getElementsByTagName('canvas').length>0){
-						var canvas = document.getElementsByTagName('canvas')[0];
-						var ctx = canvas.getContext("2d");
-						this.canvas = canvas;
-						this.ctx = ctx;
-						clearInterval(t);
-					}
-				},300);
-
-				function setScreen(gamescreen) {
-					loadCanvas(gamescreen);
-
-				}
-				function loadCanvas(gamescreenpass){
-
-
-					var settings = gamescreenpass.init();
-					var t = setInterval(function(){
-						if(this.canvas){
-							this.canvas.height = settings['height'];
-							this.canvas.width =  settings['width'];
-							this.canvas.style = 'border:1px solid black;';
-							clearInterval(t);
-
-
-							var ts = setInterval(function(){
-								gamescreenpass.render(settings);
-							},5000);
-
-
-						}
-
-					},300);
-					
-				}
-
-			}
-
-
-
-			var Game = new gOriginal();
-
-			var gs = Kenetashi.extends('GameScreen',{
-
-				//overrides
-				//this is the constructor
-				init: function() {
-
-					//initialize all variables here
-
-					return {
-						width: 500,
-						height: 500,
-						texture: 'aw'
-					};
-
-				},
-
-				//overrides
-				//do all the drawings here
-				render: function(variables) {
-					
-
-				}
 			});
-
-			//set default screen
-			Game.setScreen(gs);
-
-
-
-
-
-
-
-
 		</script>
 	</head>
 	<body>
