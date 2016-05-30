@@ -13,7 +13,8 @@ var Stage = function() {
 	},100);
 
 	var settings = {
-		actors : Array()
+		actors : Array(),
+		mousedown: false
 	};
 
 
@@ -33,6 +34,25 @@ var Stage = function() {
 			actor.act();
 		});
 		
+
+
+		jQuery('canvas').mousedown(function(event){
+			jQuery.each(settings['actors'],function(key,actor){
+				if(event.clientX>=actor.settings['x'] && event.clientX<=(actor.settings['x'] + actor.settings['width']) && event.clientY>=actor.settings['y'] && event.clientY<=(actor.settings['y'] + actor.settings['height'])){
+					settings['mousedown'] = true;
+				}else{
+					settings['mousedown'] = false;
+				}
+			});
+		});
+
+		jQuery('canvas').mouseup(function(event){
+			settings['mousedown'] = false;
+		});
+
+		if(settings['mousedown']==true){
+			console.log('perform');
+		}
 	}
 
 	return this;
