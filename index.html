@@ -36,30 +36,39 @@
 						
 						var actor = Kenetashi.extends('Actor',{
 
+							onClick: function() {
+								console.log('i am clicked');
+
+							},
 							init: function() {
 
 								var settings = {
 									txt: txt,
-									spr: spr
+									spr: spr,
+									x: 100,
+									y: 1
 
-								}
+								};
 								return settings;
 
 							},
 							onDraw: function(settings) {
-								//settings['spr'].draw(settings['txt'],0,0);
-								settings['spr'].draw(settings['txt'],1,1);
+								settings['spr'].draw(settings['txt'],settings['x'],settings['y']);
 							}
 
 						});
+
+						//adds new stage
 						var stg = new Stage();
+
 						stg.addActor(actor);
 						
 						//initialize all variables here
 						var settings =  {
 							width: 500,
 							height: 500,
-							stage: stg
+							stage: stg,
+							actor: actor
 						};
 						return settings;
 					},
@@ -69,7 +78,6 @@
 					//this is the main loop
 					render: function(settings) {
 						settings['stage'].act();
-
 					}
 				});
 
