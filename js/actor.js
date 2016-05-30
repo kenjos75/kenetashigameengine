@@ -1,5 +1,7 @@
 var Actor = function() {
 
+	this.settings = Array();
+
 
 	this.onClick = function() {
 
@@ -14,4 +16,7 @@ var Actor = function() {
 
 	}
 
+	this.act = function() {
+		this.onDraw(this.init());
+	}
 }

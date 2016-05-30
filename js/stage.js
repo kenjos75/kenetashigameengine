@@ -17,8 +17,6 @@ var Stage = function() {
 	};
 
 
-
-
 	this.settings =settings;
 
 
@@ -31,13 +29,8 @@ var Stage = function() {
 
 	this.act = function() {
 
-		jQuery.each(settings['actors'],function(key,value){
-			value.onDraw(value.init());
-		});
-		jQuery('canvas').click(function(e){
-			jQuery.each(settings['actors'],function(key,value){
-
-			});			
+		jQuery.each(settings['actors'],function(key,actor){
+			actor.act();
 		});
 		
 	}
