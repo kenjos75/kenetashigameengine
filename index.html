@@ -7,7 +7,6 @@
 		<!-- responsible for setting/changing screen -->
 		<script src="js/screen.js"></script>
 
-
 		<!-- responsible for textures -->
 		<script src="js/spritebatch.js"></script>
 
@@ -16,8 +15,7 @@
 
 
 		<!-- responsible for actors -->
-		<script src="js/stage.js"></script>
-
+		<script src="js/actor.js"></script>
 
 		<!-- responsible for stage -->
 		<script src="js/stage.js"></script>
@@ -34,28 +32,43 @@
 					init: function() {
 
 						var txt = new Texture('smile.png');
-						var sad = new Texture('sad.png'); 
+						var spr = new SpriteBatch(); 
+						
+						var actor = Kenetashi.extends('Actor',{
 
+							init: function() {
 
+								var settings = {
+									txt: txt,
+									spr: spr
 
-						var spr = new SpriteBatch();
+								}
+								return settings;
 
+							},
+							onDraw: function(settings) {
+								//settings['spr'].draw(settings['txt'],0,0);
+								settings['spr'].draw(settings['txt'],1,1);
+							}
 
+						});
+						var stg = new Stage();
+						stg.addActor(actor);
+						
 						//initialize all variables here
 						var settings =  {
 							width: 500,
 							height: 500,
-							texture: txt,
-							sad: sad,
-							spritebatch: spr
+							stage: stg
 						};
 						return settings;
 					},
 
 					//overrides
 					//do all the drawings here
+					//this is the main loop
 					render: function(settings) {
-						
+						settings['stage'].act();
 
 					}
 				});

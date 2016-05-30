@@ -18,12 +18,6 @@ var SpriteBatch = function() {
 		if(x && y) {
 			ctx.drawImage(resource.settings['img'],x,y);
 		}
-		
-
-
-
-
-
 	}
 
 
